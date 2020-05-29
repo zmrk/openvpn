@@ -1,6 +1,7 @@
 #!/bin/bash
 
 title="[CRAZYGUYS]"
+myip=$(ip route get 8.8.8.8 | awk 'NR==1 {print $(NF-2)}')
 
 # 파라미터가 없으면 종료 
 if [ "$#" -lt 1 ]; then
@@ -32,7 +33,7 @@ cp ~/pki/private/$1.key ~/openvpn/client.key
 # 압축하고 메일 전송
 cd ~/openvpn
 tar -czf openvpn.tar.gz *
-echo -e "$title $1 \n OpenVPN profile 입니다. \n 파일이 유출되지 않도록 조심해주세요. \n https://www.notion.so/crazyguys/OpenVPN-f4cd89aac1c0491caf39cb0674231389" | sudo mail -s "$title $1 OpenVPN profile" -a openvpn.tar.gz $mail
+echo -e "$title[$myip] $1 \n OpenVPN profile 입니다. \n 파일이 유출되지 않도록 조심해주세요. \n https://www.notion.so/crazyguys/OpenVPN-f4cd89aac1c0491caf39cb0674231389" | sudo mail -s "$title[$myip] $1 OpenVPN profile" -a openvpn.tar.gz $mail
 echo "Mail sending... $mail"
 
 # 삭제
