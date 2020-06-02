@@ -1,7 +1,8 @@
 #!/bin/bash
 
 title="[CRAZYGUYS]"
-myip=$(ip route get 8.8.8.8 | awk 'NR==1 {print $(NF-2)}')
+#myip=$(ip route get 8.8.8.8 | awk 'NR==1 {print $(NF-2)}')
+myip=$(curl -s http://checkip.amazonaws.com)
 
 # 파라미터가 없으면 종료 
 if [ "$#" -lt 1 ]; then
